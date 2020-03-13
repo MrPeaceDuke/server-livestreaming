@@ -10,18 +10,20 @@
 </body>
     <script src="/socket.io/socket.io.js"></script>
     <script>
-        startCapture();
+        var startedCapture = false;
+        let stream = startCapture();
+        
         var FPS = 30;
-        var socket = io.connect('http://localhost');
-        setInterval(()=>{
-            socket.emit('signal', { my: 'data' });
-        }, 1000/FPS); 
+        
 
         async function startCapture(displayMediaOptions) {
             let captureStream = null;
-
+            startedCapture = true;
             try {
                 captureStream = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
+                var socket = io.connect('http://localhost');
+                socket.emit('signal', captureStream);
+                console.log(captureStream);
             } catch(err) {
                 console.error("Error: " + err);
             }

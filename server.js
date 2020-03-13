@@ -10,7 +10,6 @@ app.get('/', function (req, res) {
 });
 
 io.on('connection', function (socket) {
-  socket.emit('news', { hello: 'world' });
   socket.on('signal', function (data) {
     console.log(data);
   });
