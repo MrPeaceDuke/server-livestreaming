@@ -7,29 +7,34 @@
 </head>
 <body>
     <video id="videoStream" width="700" height="500" autoplay></video>
+    <a href="/view">Viewer</a>
     <button type="submit" id="btnStart">Start display stream</button>
 </body>
     <script src="/socket.io/socket.io.js"></script>
     <script>
-        var startedCapture = false;
-        let stream = null;
+        var canvas = document.getElementById('videoStream');
+        var stream = null; //canvas.captureStream(25);
+        var recordedChunks = [];
+        var options = { mimeType: "video/webm; codecs=vp9" };
         
+        //mediaRecorder.start();
+
         var FPS = 30;
         var socket = io.connect('http://localhost');
 
         document.getElementById('btnStart').onclick = ()=>{
-            stream = startCapture();
+            startCapture();
         };
         
-        var interval = setInterval(()=>{
-            console.log('timer running');
-            socket.on('signal', data => {
-                document.getElementById('videoStream').srcObject = data;
-            });
-            if(document.getElementById('videoStream').srcObject) {
-                clearInterval(interval);
-            }
-        }, 1000);
+        // var interval = setInterval(()=>{
+        //     // console.log('timer running');
+        //     socket.on('signal', data => {
+        //         canvas.srcObject = data;
+        //     });
+        //     if(canvas.srcObject) {
+        //         clearInterval(interval);
+        //     }
+        // }, 1000);
         
 
         async function startCapture(displayMediaOptions) {
@@ -39,8 +44,14 @@
                 captureStream = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
                 socket.emit('streaming', captureStream);
                 // socket.emit('test', { my: 'data' });
-                console.log(captureStream);
-                document.getElementById('videoStream').srcObject = captureStream;
+                canvas.srcObject = captureStream;
+                stream = canvas.captureStream(25);
+                mediaRecorder = new MediaRecorder(stream, options);
+                mediaRecorder.start();
+                var timerSendData = setInterval(()=>{
+                    console.log('timerSendData running');
+                    socket.emit('streaming', mediaRecorder.requestData());
+                }, 1000);
             } catch(err) {
                 console.error("Error: " + err);
             }
