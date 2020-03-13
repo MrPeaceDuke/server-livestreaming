@@ -6,10 +6,10 @@ var io = require('socket.io')(server);
 server.listen(80);
 
 app.get('/', function (req, res) {
-    res.sendFile(__dirname + '/src' + '/app' + '/index.html');
+    res.sendFile(__dirname + '/index.html');
 });
 app.get('/view', function (req, res) {
-    res.sendFile(__dirname + '/src' + '/app' + '/view.html');
+    res.sendFile(__dirname + '/view.html');
 });
 var capturedStream = null;
 io.on('connection', function (socket) {
