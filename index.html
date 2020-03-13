@@ -6,14 +6,30 @@
     <title>Webinar</title>
 </head>
 <body>
-    
+    <video id="videoStream" width="700" height="500" autoplay></video>
+    <button type="submit" id="btnStart">Start display stream</button>
 </body>
     <script src="/socket.io/socket.io.js"></script>
     <script>
         var startedCapture = false;
-        let stream = startCapture();
+        let stream = null;
         
         var FPS = 30;
+        var socket = io.connect('http://localhost');
+
+        document.getElementById('btnStart').onclick = ()=>{
+            stream = startCapture();
+        };
+        
+        var interval = setInterval(()=>{
+            console.log('timer running');
+            socket.on('signal', data => {
+                document.getElementById('videoStream').srcObject = data;
+            });
+            if(document.getElementById('videoStream').srcObject) {
+                clearInterval(interval);
+            }
+        }, 1000);
         
 
         async function startCapture(displayMediaOptions) {
@@ -21,9 +37,10 @@
             startedCapture = true;
             try {
                 captureStream = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
-                var socket = io.connect('http://localhost');
-                socket.emit('signal', captureStream);
+                socket.emit('streaming', captureStream);
+                // socket.emit('test', { my: 'data' });
                 console.log(captureStream);
+                document.getElementById('videoStream').srcObject = captureStream;
             } catch(err) {
                 console.error("Error: " + err);
             }
