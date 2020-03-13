@@ -1,0 +1,12 @@
+{
+  "name": "server-livestreaming",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/MrPeaceDuke/server-livestreaming.git",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "jquery": "^3.4.1",
+    "socket.io": "^2.3.0"
+  }
+}
