@@ -9,7 +9,7 @@ var chunks = [];
 //mediaRecorder.start();
 
 var FPS = 30;
-var socket = io.connect('http://server-livestreaming.herokuapp.com');
+var socket = io.connect();
 
 if(document.getElementById('btnStart')) {
 	document.getElementById('btnStart').onclick = ()=>{
