@@ -2,8 +2,8 @@ var express = require('express');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
-
-server.listen(80);
+var port = process.env.PORT || 3000;
+server.listen(port);
 console.log('Server started on 80 port');
 
 
