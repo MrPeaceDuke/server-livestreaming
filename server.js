@@ -21,14 +21,13 @@ app.use(express.static('dist'));
 var capturedStream = null;
 io.on('connection', function (socket) {
     
-    socket.on('signal', function (data) {
-        socket.emit('signal', capturedStream);
-    });
+    // socket.on('signal', function (data) {
+    //     socket.emit('signal', capturedStream);
+    // });
     socket.on('test', function (data) {
         console.log(data);
     });
     socket.on('streaming', function (data) {
-        console.log('Streaming running');
-        socket.emit('signal', data);
+        socket.broadcast.emit('signal', data);
     });
 });
