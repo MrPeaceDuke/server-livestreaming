@@ -4,13 +4,20 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
 server.listen(80);
+console.log('Server started on 80 port');
+
+
+app.set('view engine', 'ejs');
+app.set('views', './views');
 
 app.get('/', function (req, res) {
-    res.sendFile(__dirname + '/index.html');
+    res.render('index');
 });
 app.get('/view', function (req, res) {
-    res.sendFile(__dirname + '/view.html');
+    res.render('view');
 });
+app.use(express.static('dist'));
+
 var capturedStream = null;
 io.on('connection', function (socket) {
     

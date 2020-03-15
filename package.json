@@ -5,8 +5,14 @@
   "repository": "https://github.com/MrPeaceDuke/server-livestreaming.git",
   "license": "MIT",
   "dependencies": {
+    "ejs": "^3.0.1",
     "express": "^4.17.1",
+    "fs": "^0.0.1-security",
     "jquery": "^3.4.1",
     "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.11"
   }
 }
