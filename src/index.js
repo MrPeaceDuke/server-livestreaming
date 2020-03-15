@@ -2,7 +2,7 @@ const io = require('socket.io-client');
 const $ = require('jquery');
 
 var canvas = document.getElementById('videoStream');
-var stream = null; //canvas.captureStream(25);
+var stream = null; 
 var options = { mimeType: "video/webm; codecs=vp9" };
 var chunks = [];
 

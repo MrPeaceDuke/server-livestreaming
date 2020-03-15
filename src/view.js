@@ -11,11 +11,11 @@ var concatenatedBlobs = new Blob(blobs);
 socket.on('signal', (videoStream) => {
 	console.table(videoStream);
 	var video = document.querySelector('viewer');
-	video.srcObject = videoStream;
-	video.load();
-	video.onloadeddata = function() {
-		URL.revokeObjectURL(video.src);
-		video.play();
+	canvas.srcObject = videoStream;
+	canvas.load();
+	canvas.onloadeddata = function() {
+		URL.revokeObjectURL(canvas.srcObject);
+		canvas.play();
 	}
 	
 });
