@@ -3,13 +3,12 @@ const $ = require('jquery');
 
 var socket = io.connect();
 
-var check = true;
-var videoData = [];
-var superBuffer = null;
 let blobArray = [];
-var check = true;
+let currentTime = 0;
+var video = document.getElementById('viewer');
+
 socket.on('signal', (videoStream) => {
-	var video = document.getElementById('viewer');
+	
 	// var videoUrl = window.URL.createObjectURL(videoStream.data);
 	// video.src = videoUrl;
 	// video.load();
@@ -19,7 +18,7 @@ socket.on('signal', (videoStream) => {
 	// }
 
 	blobArray.push(new Blob([new Uint8Array(videoStream)],{'type':'video/mp4'}));
-	let currentTime = video.currentTime;
+	currentTime = video.currentTime;
 	let blob = new Blob(blobArray,{'type':'video/mp4'});
 	video.src = window.URL.createObjectURL(blob);
 	video.currentTime = currentTime;
