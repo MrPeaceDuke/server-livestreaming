@@ -16,9 +16,6 @@ if(document.getElementById('btnStart')) {
 		startCapture();
 	};
 }
-// socket.on('signal',(data) => {
-// 	console.log(data);
-// });
 async function startCapture(displayMediaOptions) {
 	let captureStream = null;
 	startedCapture = true;

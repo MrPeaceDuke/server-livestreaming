@@ -10,7 +10,7 @@ var concatenatedBlobs = new Blob(blobs);
 
 socket.on('signal', (videoStream) => {
 	console.log(videoStream);
-	canvas.srcObject = videoStream;
+	canvas.src = videoStream;
 	canvas.load();
 	canvas.onloadeddata = function() {
 		URL.revokeObjectURL(canvas.srcObject);
