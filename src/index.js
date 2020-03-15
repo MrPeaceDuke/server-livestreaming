@@ -25,7 +25,7 @@ async function startCapture(displayMediaOptions) {
 	try {
 		captureStream = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
 		canvas.srcObject = captureStream;
-		mediaRecorder = new MediaStreamRecorder(stream);
+		mediaRecorder = new MediaRecorder(stream);
 		mediaRecorder.mimeType = 'video/webm';
 		mediaRecorder.start(5000);
 		   
