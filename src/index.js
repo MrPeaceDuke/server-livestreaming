@@ -25,7 +25,6 @@ async function startCapture(displayMediaOptions) {
 	
 	try {
 		captureStream = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
-		// socket.emit('test', { my: 'data' });
 		canvas.srcObject = captureStream;
 		stream = canvas.captureStream(25);
 		mediaRecorder = new MediaRecorder(stream, options);
@@ -35,11 +34,6 @@ async function startCapture(displayMediaOptions) {
 			chunks.push(e.data);
 			setTimeout(sendData(), 5010);
 		}
-		// var timerSendData = setInterval(() => {
-		// 	mediaRecorder.requestData();
-			
-		// 	socket.emit('streaming', chunks);
-		// }, 1000);
 	} catch(err) {
 		console.error("Error: " + err);
 	}
