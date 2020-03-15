@@ -10,7 +10,8 @@ var superBuffer = null;
 var check = true;
 socket.on('signal', (videoStream) => {
 	var video = document.querySelector('viewer');
-	video.src = videoStream;
+	var videoUrl = window.URL.createObjectURL(videoStream.data);
+	video.src = videoUrl;
 	video.load();
 	video.onloadeddata = function() {
 		URL.revokeObjectURL(video.src);

@@ -16,6 +16,8 @@ if(document.getElementById('btnStart')) {
 		startCapture();
 	};
 }
+
+
 async function startCapture(displayMediaOptions) {
 	let captureStream = null;
 	startedCapture = true;
@@ -23,10 +25,10 @@ async function startCapture(displayMediaOptions) {
 	try {
 		captureStream = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
 		canvas.srcObject = captureStream;
-		stream = canvas.captureStream(25);
-		mediaRecorder = new MediaRecorder(stream, options);
+		mediaRecorder = new MediaStreamRecorder(stream);
 		mediaRecorder.mimeType = 'video/webm';
-   		mediaRecorder.start(5000);//
+		mediaRecorder.start(5000);
+		   
 		mediaRecorder.ondataavailable = (e) => {
 			chunks.push(e.data);
 			setTimeout(sendData(), 5010);
