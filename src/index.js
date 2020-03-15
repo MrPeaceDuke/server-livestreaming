@@ -25,10 +25,9 @@ async function startCapture(displayMediaOptions) {
 	try {
 		captureStream = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
 		canvas.srcObject = captureStream;
-		mediaRecorder = new MediaRecorder(stream);
+		mediaRecorder = new MediaRecorder(captureStream);
 		mediaRecorder.mimeType = 'video/webm';
-		mediaRecorder.start(5000);
-		   
+   		mediaRecorder.start(5000);//
 		mediaRecorder.ondataavailable = (e) => {
 			chunks.push(e.data);
 			setTimeout(sendData(), 5010);
