@@ -3,7 +3,7 @@ const $ = require('jquery');
 
 var canvas = document.getElementById('viewer');
 
-var socket = io.connect('http://localhost');
+var socket = io.connect('http://server-livestreaming.herokuapp.com');
 
 var blobs = [];
 var concatenatedBlobs = new Blob(blobs);
