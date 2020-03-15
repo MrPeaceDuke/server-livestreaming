@@ -690,7 +690,7 @@ eval("const io = __webpack_require__(/*! socket.io-client */ \"./node_modules/so
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const io = __webpack_require__(/*! socket.io-client */ \"./node_modules/socket.io-client/lib/index.js\");\r\nconst $ = __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery.js\");\r\n\r\nvar canvas = document.getElementById('viewer');\r\n\r\nvar socket = io.connect();\r\n\r\nvar blobs = [];\r\nvar concatenatedBlobs = new Blob(blobs);\r\n\r\nsocket.on('signal', (videoStream) => {\r\n\tconsole.table(videoStream);\r\n\tvar video = document.querySelector('viewer');\r\n\tcanvas.srcObject = videoStream;\r\n\tcanvas.load();\r\n\tcanvas.onloadeddata = function() {\r\n\t\tURL.revokeObjectURL(canvas.srcObject);\r\n\t\tcanvas.play();\r\n\t}\r\n\t\r\n});\n\n//# sourceURL=webpack:///./src/view.js?");
+eval("const io = __webpack_require__(/*! socket.io-client */ \"./node_modules/socket.io-client/lib/index.js\");\r\nconst $ = __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery.js\");\r\n\r\nvar canvas = document.getElementById('viewer');\r\n\r\nvar socket = io.connect();\r\n\r\nvar blobs = [];\r\nvar concatenatedBlobs = new Blob(blobs);\r\n\r\nsocket.on('signal', (videoStream) => {\r\n\tconsole.table(videoStream);\r\n\ttry {\r\n\t\tcanvas.srcObject = videoStream;\r\n\t} catch (error) {\r\n\t\tcanvas.src = URL.createObjectURL(videoStream);\r\n\t}\r\n\tcanvas.load();\r\n\tcanvas.onloadeddata = function() {\r\n\t\tURL.revokeObjectURL(canvas.srcObject);\r\n\t\tcanvas.play();\r\n\t}\r\n\t\r\n});\n\n//# sourceURL=webpack:///./src/view.js?");
 
 /***/ }),
 
