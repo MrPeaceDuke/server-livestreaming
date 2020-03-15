@@ -22,6 +22,7 @@ socket.on('signal', (videoStream) => {
 	let blob = new Blob(blobArray,{'type':'video/mp4'});
 	video.src = window.URL.createObjectURL(blob);
 	video.currentTime = currentTime;
-
+	video.play();
+	
 	console.table(videoStream);
 });
