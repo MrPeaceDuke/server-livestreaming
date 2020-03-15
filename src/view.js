@@ -19,7 +19,7 @@ socket.on('signal', (videoStream) => {
 	// }
 
 	blobArray.push(new Blob([new Uint8Array(videoStream)],{'type':'video/mp4'}));
-	// let currentTime = video.currentTime;
+	let currentTime = video.currentTime;
 	let blob = new Blob(blobArray,{'type':'video/mp4'});
 	video.src = window.URL.createObjectURL(blob);
 	video.currentTime = currentTime;
