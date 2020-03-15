@@ -690,7 +690,7 @@ eval("const io = __webpack_require__(/*! socket.io-client */ \"./node_modules/so
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const io = __webpack_require__(/*! socket.io-client */ \"./node_modules/socket.io-client/lib/index.js\");\r\nconst $ = __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery.js\");\r\n\r\nvar socket = io.connect();\r\n\r\nvar check = true;\r\nvar videoData = [];\r\nvar superBuffer = null;\r\n\r\nvar check = true;\r\nsocket.on('signal', (videoStream) => {\r\n\tvar video = document.querySelector('viewer');\r\n\tvar videoUrl = window.URL.createObjectURL(videoStream.data);\r\n\tvideo.src = videoUrl;\r\n\tvideo.load();\r\n\tvideo.onloadeddata = function() {\r\n\t\tURL.revokeObjectURL(video.src);\r\n\t\tvideo.play();\r\n\t}\r\n\t//video.srcObject\r\n\r\n\t//video.play();\r\n\r\n\tconsole.table(videoStream);\r\n});\n\n//# sourceURL=webpack:///./src/view.js?");
+eval("const io = __webpack_require__(/*! socket.io-client */ \"./node_modules/socket.io-client/lib/index.js\");\r\nconst $ = __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery.js\");\r\n\r\nvar socket = io.connect();\r\n\r\nvar check = true;\r\nvar videoData = [];\r\nvar superBuffer = null;\r\n\r\nvar check = true;\r\nsocket.on('signal', (videoStream) => {\r\n\tvar video = document.querySelector('viewer');\r\n\tvideo.src = videoStream;\r\n\tvideo.load();\r\n\tvideo.onloadeddata = function() {\r\n\t\tURL.revokeObjectURL(video.src);\r\n\t\tvideo.play();\r\n\t}\r\n\t//video.srcObject\r\n\r\n\t//video.play();\r\n\r\n\tconsole.table(videoStream);\r\n});\n\n//# sourceURL=webpack:///./src/view.js?");
 
 /***/ }),
 
