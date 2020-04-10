@@ -1,33 +1,26 @@
-var express = require('express');
-var app = express();
-var server = require('http').Server(app);
-var io = require('socket.io')(server);
-var port = process.env.PORT || 3000;
-server.listen(port);
-console.log('Server started on 80 port');
+var express = require('express'); // подключение express.js
+var app = express(); // создание приложения используя express
+var server = require('http').Server(app);//подключение http
+var io = require('socket.io')(server);//подключение socket.io
+var port = process.env.PORT || 3000;//переменная с выбором порта для приёма данных по нему.
+//выбирается либо серверный 80 порт, либо 3000
+server.listen(port);//запускается сервер
+console.log('Server started on '+port+' port');//уведомляет в консоль о запуске сервера
 
 
-app.set('view engine', 'ejs');
-app.set('views', './views');
+app.set('view engine', 'ejs');//дополнительная библиотека для разметки страниц
+app.set('views', './views');//указание директории с доступными страницами
 
-app.get('/', function (req, res) {
+app.get('/', function (req, res) {//маршрутизация страницы ведущего
     res.render('index');
 });
-app.get('/view', function (req, res) {
+app.get('/view', function (req, res) {//маршрутизация страницы слушателей
     res.render('view');
 });
-app.use(express.static('dist'));
+app.use(express.static('dist'));//указание директории статических файлов
 
-var capturedStream = null;
-io.on('connection', function (socket) {
-    
-    // socket.on('signal', function (data) {
-    //     socket.emit('signal', capturedStream);
-    // });
-    socket.on('test', function (data) {
-        console.log(data);
-    });
-    socket.on('streaming', function (data) {
-        socket.broadcast.emit('signal', data);
+io.on('connection', function (socket) { //функция на подключение по socket.io
+    socket.on('streaming', function (data) { //на streaming
+        socket.broadcast.emit('signal', data); //посылает всем слушателем data
     });
 });

@@ -4,11 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Webinar</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
-<body>
-    <video id="videoStream" width="700" height="500" autoplay></video>
-    <a href="/view">Viewer</a>
-    <button type="submit" id="btnStart">Start display stream</button>
+<body style="background-color:#eceff1;" class="width:100vw; height: 100vh">
+        
+
+        
+    <video id="videoStream" width="100%" height="auto" autoplay class="bg-dark mx-auto"></video>
+
+    <div class="text-center">
+        <div class="fixed-bottom" style="bottom: 20px">
+            <a href="/view" class="text-light">Viewer</a>
+            <button type="submit" id="btnStart" class="btn btn-secondary btn-lg bg-danger rounded-circle"><span class="material-icons" style="    font-size: 24px;
+                line-height: 40px; display: block;">
+                missed_video_call
+                </span></button>
+        </div>
+    </div>
 </body>
     <script src="main.js"></script>
 </html>
